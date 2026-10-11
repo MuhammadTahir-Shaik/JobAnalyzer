@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Application | JobAnalyzer</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8f5;
+            color: #24364b;
+        }
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #163a5f;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            color: #294968;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #9eb5cc;
+
+            padding: 9px 17px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #eef4fa;
+        }
+
+        .page-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #245b91;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+        .back-link:hover {
+            color: #163f68;
+        }
+
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: #163a5f;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .application-card {
+            background: #ffffff;
+            border: 1px solid #dce5ee;
+            border-radius: 16px;
+
+            padding: 32px;
+
+            box-shadow: 0 8px 25px rgba(30, 58, 90, 0.07);
+        }
+
+        .application-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 20px;
+
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e5eaf0;
+
+            margin-bottom: 28px;
+        }
+
+        .company-name {
+            color: #245b91;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .job-title {
+            font-size: 28px;
+            color: #163a5f;
+            margin-bottom: 6px;
+        }
+
+        .location {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 8px 14px;
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            background: #e8f1fb;
+            color: #245b91;
+
+            white-space: nowrap;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+
+            margin-bottom: 32px;
+        }
+
+        .info-item {
+            background: #f7f9fc;
+            border: 1px solid #e3eaf2;
+
+            border-radius: 10px;
+            padding: 17px;
+        }
+
+        .info-label {
+            display: block;
+
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            color: #263b52;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .details-section {
+            margin-top: 28px;
+        }
+
+        .details-section h2 {
+            font-size: 18px;
+            color: #163a5f;
+            margin-bottom: 12px;
+        }
+
+        .details-box {
+            background: #f8fafc;
+            border: 1px solid #e3eaf2;
+
+            border-radius: 10px;
+            padding: 20px;
+
+            color: #52657a;
+            font-size: 14px;
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+        }
+
+        .empty-text {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .bottom-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            margin-top: 32px;
+            padding-top: 24px;
+
+            border-top: 1px solid #e5eaf0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 11px 18px;
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #b7c9db;
+        }
+
+        .back-btn:hover {
+            background: #f0f5fa;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            .page-container {
+                margin: 30px auto;
+            }
+
+            .application-card {
+                padding: 22px;
+            }
+
+            .application-title {
+                flex-direction: column;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            Job<span>Analyzer</span>
+        </a>
+
+        <div class="nav-right">
+
+            <span class="user-name">
+                {{ session["user_name"] }}
+            </span>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page-container">
+
+        <a
+            href="{{ url_for('applications') }}"
+            class="back-link"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Applications
+        </a>
+
+
+        <div class="page-header">
+
+            <h1>Application Details</h1>
+
+            <p>
+                View the complete details of your job application.
+            </p>
+
+        </div>
+
+
+        <div class="application-card">
+
+            <div class="application-title">
+
+                <div>
+
+                    <div class="company-name">
+                        {{ application.company }}
+                    </div>
+
+                    <h2 class="job-title">
+                        {{ application.job_title }}
+                    </h2>
+
+                    {% if application.location %}
+
+                        <div class="location">
+                            <i class="bi bi-geo-alt"></i>
+                            {{ application.location }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="status">
+                    {{ application.status }}
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Job Type
+                    </span>
+
+                    <div class="info-value">
+                        {{ application.job_type or "Not specified" }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Application Date
+                    </span>
+
+                    <div class="info-value">
+                        {{ application.application_date }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-section">
+
+                <h2>
+                    <i class="bi bi-file-text"></i>
+                    Job Description
+                </h2>
+
+                <div class="details-box">
+
+                    {% if application.job_description %}
+
+                        {{ application.job_description }}
+
+                    {% else %}
+
+                        <span class="empty-text">
+                            No job description was added.
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="details-section">
+
+                <h2>
+                    <i class="bi bi-sticky"></i>
+                    Notes
+                </h2>
+
+                <div class="details-box">
+
+                    {% if application.notes %}
+
+                        {{ application.notes }}
+
+                    {% else %}
+
+                        <span class="empty-text">
+                            No notes were added.
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="bottom-actions">
+
+                <a
+                    href="{{ url_for('applications') }}"
+                    class="btn back-btn"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Applications
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

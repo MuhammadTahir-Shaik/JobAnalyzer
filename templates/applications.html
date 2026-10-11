@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | JobAnalyzer</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8f5;
+            color: #24364b;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #163a5f;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            color: #294968;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #9eb5cc;
+
+            padding: 9px 17px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #eef4fa;
+        }
+
+        /* Main */
+
+        .page-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: #163a5f;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #cfdbe7;
+
+            padding: 11px 18px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #f4f8fc;
+            border-color: #b8c9da;
+        }
+
+        .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #245b91;
+            color: #ffffff;
+
+            padding: 11px 18px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+
+            box-shadow: 0 5px 14px rgba(36, 91, 145, 0.18);
+        }
+
+        .add-btn:hover {
+            background: #163f68;
+        }
+
+        /* Toolbar */
+
+        .toolbar {
+            background: #ffffff;
+            border: 1px solid #dce5ee;
+            border-radius: 14px;
+
+            padding: 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 5px 18px rgba(30, 58, 90, 0.05);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: #94a3b8;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            padding: 12px 14px 12px 42px;
+
+            border: 1px solid #cfdbe7;
+            border-radius: 8px;
+
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+        .status-filter {
+            min-width: 180px;
+
+            padding: 12px 14px;
+
+            border: 1px solid #cfdbe7;
+            border-radius: 8px;
+
+            background: #ffffff;
+            color: #334155;
+
+            font-size: 14px;
+            outline: none;
+        }
+
+        .status-filter:focus {
+            border-color: #3b82f6;
+        }
+
+        /* Table */
+
+        .table-card {
+            background: #ffffff;
+
+            border: 1px solid #dce5ee;
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow: 0 7px 22px rgba(30, 58, 90, 0.06);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #eef4fa;
+        }
+
+        th {
+            padding: 16px 18px;
+
+            text-align: left;
+
+            color: #456079;
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 18px;
+
+            border-top: 1px solid #edf1f5;
+
+            color: #52657a;
+            font-size: 14px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .company {
+            color: #163a5f;
+            font-weight: 700;
+        }
+
+        .job-title {
+            color: #334e68;
+            font-weight: 600;
+        }
+
+        .muted {
+            color: #94a3b8;
+        }
+
+        /* Status */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 11px;
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .status-applied {
+            background: #e8f1fb;
+            color: #245b91;
+        }
+
+        .status-interview {
+            background: #fff3d9;
+            color: #a16207;
+        }
+
+        .status-selected {
+            background: #e8f7ef;
+            color: #15803d;
+        }
+
+        .status-rejected {
+            background: #fdecec;
+            color: #dc2626;
+        }
+
+        /* Actions */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 34px;
+            height: 34px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: all 0.2s ease;
+        }
+
+        .view-btn {
+            background: #edf5ff;
+            color: #2563eb;
+            border: 1px solid #cfe1f7;
+        }
+
+        .view-btn:hover {
+            background: #dcecff;
+        }
+
+        .edit-btn {
+            background: #fff5df;
+            color: #b7791f;
+            border: 1px solid #f0d9a5;
+        }
+
+        .edit-btn:hover {
+            background: #ffedc7;
+        }
+
+        .delete-btn {
+            background: #fff0f0;
+            color: #dc2626;
+            border: 1px solid #f4cccc;
+
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #ffe1e1;
+        }
+
+        /* Empty State */
+
+        .empty-state {
+            text-align: center;
+            padding: 70px 30px;
+        }
+
+        .empty-icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            background: #edf4fb;
+            color: #245b91;
+
+            border-radius: 50%;
+
+            font-size: 25px;
+        }
+
+        .empty-state h2 {
+            color: #163a5f;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            .page-container {
+                margin: 30px auto;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-filter {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            Job<span>Analyzer</span>
+        </a>
+
+        <div class="nav-right">
+
+            <span class="user-name">
+                {{ session["user_name"] }}
+            </span>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <main class="page-container">
+
+        <!-- Header -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>My Applications</h1>
+
+                <p>
+                    Manage and track all your job applications in one place.
+                </p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="back-btn"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+                <a
+                    href="{{ url_for('add_application') }}"
+                    class="add-btn"
+                >
+                    <i class="bi bi-plus-lg"></i>
+                    Add Application
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Search & Filter -->
+
+        <div class="toolbar">
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by company or job title..."
+                    onkeyup="filterApplications()"
+                >
+
+            </div>
+
+
+            <select
+                id="statusFilter"
+                class="status-filter"
+                onchange="filterApplications()"
+            >
+
+                <option value="All">All Statuses</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Applications Table -->
+
+        <div class="table-card">
+
+            {% if applications %}
+
+                <div class="table-wrapper">
+
+                    <table id="applicationsTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Company</th>
+                                <th>Job Title</th>
+                                <th>Location</th>
+                                <th>Application Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for application in applications %}
+
+                                <tr>
+
+                                    <td class="company">
+                                        {{ application.company }}
+                                    </td>
+
+                                    <td class="job-title">
+                                        {{ application.job_title }}
+                                    </td>
+
+                                    <td>
+
+                                        {% if application.location %}
+
+                                            {{ application.location }}
+
+                                        {% else %}
+
+                                            <span class="muted">
+                                                Not specified
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+                                        {{ application.application_date }}
+                                    </td>
+
+                                    <td>
+
+                                        {% if application.status == "Applied" %}
+
+                                            <span class="status status-applied">
+                                                Applied
+                                            </span>
+
+                                        {% elif application.status == "Interview" %}
+
+                                            <span class="status status-interview">
+                                                Interview
+                                            </span>
+
+                                        {% elif application.status == "Selected" %}
+
+                                            <span class="status status-selected">
+                                                Selected
+                                            </span>
+
+                                        {% elif application.status == "Rejected" %}
+
+                                            <span class="status status-rejected">
+                                                Rejected
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status status-applied">
+                                                {{ application.status }}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+
+                                        <div class="actions">
+
+                                            <!-- View -->
+
+                                            <a
+                                                href="{{ url_for('view_application', application_id=application.id) }}"
+                                                class="action-btn view-btn"
+                                                title="View Application"
+                                            >
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+
+
+                                            <!-- Edit -->
+
+                                            <a
+                                                href="{{ url_for('edit_application', application_id=application.id) }}"
+                                                class="action-btn edit-btn"
+                                                title="Edit Application"
+                                            >
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+
+                                            <!-- Delete -->
+
+                                            <form
+                                                method="POST"
+                                                action="{{ url_for('delete_application', application_id=application.id) }}"
+                                                onsubmit="return confirmDelete();"
+                                                style="display: inline;"
+                                            >
+
+                                                <button
+                                                    type="submit"
+                                                    class="action-btn delete-btn"
+                                                    title="Delete Application"
+                                                >
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <!-- Empty State -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+
+                    <h2>No applications yet</h2>
+
+                    <p>
+                        Start tracking your job search by adding your first application.
+                    </p>
+
+                    <a
+                        href="{{ url_for('add_application') }}"
+                        class="add-btn"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+                        Add Your First Application
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        function filterApplications() {
+
+            const searchInput =
+                document.getElementById("searchInput").value.toLowerCase();
+
+            const statusFilter =
+                document.getElementById("statusFilter").value;
+
+            const table =
+                document.getElementById("applicationsTable");
+
+            if (!table) {
+                return;
+            }
+
+            const rows =
+                table
+                    .getElementsByTagName("tbody")[0]
+                    .getElementsByTagName("tr");
+
+
+            for (let i = 0; i < rows.length; i++) {
+
+                const company =
+                    rows[i].cells[0].textContent.toLowerCase();
+
+                const jobTitle =
+                    rows[i].cells[1].textContent.toLowerCase();
+
+                const status =
+                    rows[i].cells[4].textContent.trim();
+
+
+                const matchesSearch =
+                    company.includes(searchInput) ||
+                    jobTitle.includes(searchInput);
+
+                const matchesStatus =
+                    statusFilter === "All" ||
+                    status === statusFilter;
+
+
+                if (matchesSearch && matchesStatus) {
+
+                    rows[i].style.display = "";
+
+                } else {
+
+                    rows[i].style.display = "none";
+
+                }
+
+            }
+
+        }
+
+
+        function confirmDelete() {
+
+            return confirm(
+                "Are you sure you want to delete this application?"
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

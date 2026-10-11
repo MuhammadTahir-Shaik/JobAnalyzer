@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobAnalyzer | My Profile</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 800;
+            color: #163a5f;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #294968;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            color: #163a5f;
+        }
+
+        .logout-btn {
+            text-decoration: none;
+            padding: 9px 17px;
+            border-radius: 8px;
+
+            background: #3b82f6;
+            border: 1px solid #2563eb;
+
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #2563eb;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page-container {
+            width: 86%;
+            max-width: 1050px;
+            margin: auto;
+
+            padding: 50px 0 70px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #163a5f;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #66788a;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           PROFILE HERO
+        ========================= */
+
+        .profile-card {
+            background: #ffffff;
+
+            border: 1px solid #dfe5eb;
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px rgba(22, 58, 95, 0.06);
+
+            overflow: hidden;
+
+            margin-bottom: 25px;
+        }
+
+        .profile-top {
+            padding: 30px;
+
+            display: flex;
+            align-items: center;
+            gap: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef5fc,
+                    #f8fbff
+                );
+
+            border-bottom: 1px solid #e0e8f0;
+        }
+
+        .profile-picture {
+            width: 86px;
+            height: 86px;
+
+            border-radius: 50%;
+
+            background: #dbe8f5;
+            border: 4px solid #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #245b91;
+            font-size: 34px;
+
+            box-shadow:
+                0 5px 15px rgba(22, 58, 95, 0.12);
+
+            flex-shrink: 0;
+        }
+
+        .profile-info h2 {
+            color: #163a5f;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .profile-info p {
+            color: #6b7d90;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            padding: 28px 30px;
+
+            border-bottom: 1px solid #edf0f3;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            margin-bottom: 22px;
+        }
+
+        .section-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 9px;
+
+            background: #e8f0ff;
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .section-title h3 {
+            color: #163a5f;
+            font-size: 17px;
+        }
+
+        .section-title p {
+            color: #8793a0;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+
+        /* =========================
+           INFORMATION GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-item label {
+            display: block;
+
+            color: #718096;
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            min-height: 44px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 11px 13px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e1e7ed;
+            border-radius: 9px;
+
+            color: #294968;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .skill-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 8px 12px;
+
+            background: #e8f1fc;
+            color: #245b91;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty-skills {
+            padding: 18px;
+
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 10px;
+
+            color: #84919e;
+            font-size: 13px;
+        }
+
+        .edit-skills-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: 18px;
+
+            padding: 10px 15px;
+
+            border: 0;
+            background: #245b91;
+            color: #ffffff;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .edit-skills-btn:hover {
+            background: #163f68;
+        }
+
+        .skills-edit-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px 13px;
+
+            border: 1px solid #d7e0ea;
+            border-radius: 8px;
+            outline: none;
+            resize: vertical;
+
+            color: #294968;
+            font-family: inherit;
+            font-size: 13px;
+            line-height: 1.6;
+
+            box-sizing: border-box;
+        }
+
+        .skills-edit-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+        .skills-edit-help {
+            margin: 7px 0 0;
+            color: #84919e;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FUTURE FEATURES
+        ========================= */
+
+        .future-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .future-box {
+            padding: 17px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .future-box i {
+            color: #6b7d90;
+            font-size: 19px;
+        }
+
+        .future-box h4 {
+            color: #294968;
+            font-size: 13px;
+            margin: 9px 0 5px;
+        }
+
+        .future-box p {
+            color: #8a96a3;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #163a5f;
+
+            border-top: 1px solid #28547d;
+
+            color: #d8e4f0;
+
+            text-align: center;
+
+            padding: 24px 20px;
+        }
+
+        .footer-brand {
+            color: #ffffff;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+        footer p {
+            color: #b9cbdc;
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .page-container {
+                width: 92%;
+                padding-top: 35px;
+            }
+
+            .info-grid,
+            .future-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-top {
+                padding: 24px;
+            }
+
+            .section {
+                padding: 24px;
+            }
+        }
+
+
+        /* =========================
+           PROFILE ACTIONS
+        ========================= */
+
+        .profile-picture-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-picture-edit {
+            position: absolute;
+            right: -4px;
+            bottom: -4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            background: #3b82f6;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .profile-picture-edit:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .info-value {
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .info-content {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .password-dots {
+            letter-spacing: 3px;
+        }
+
+        .info-edit-btn {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
+            border-radius: 7px;
+            border: 1px solid #cbd8e5;
+            background: #ffffff;
+            color: #245b91;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .info-edit-btn:hover {
+            background: #eef5fc;
+            border-color: #9fb9d2;
+        }
+
+        /* =========================
+           EDIT NAME MODAL
+        ========================= */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .edit-modal {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(22, 58, 95, 0.18);
+        }
+
+        .edit-modal h3 {
+            color: #163a5f;
+            font-size: 19px;
+            margin-bottom: 7px;
+        }
+
+        .edit-modal p {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .edit-name-input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d5dee8;
+            border-radius: 8px;
+            outline: none;
+            color: #294968;
+            font-size: 14px;
+        }
+
+        .edit-form-group {
+            margin-bottom: 14px;
+        }
+
+        .edit-form-group label {
+            display: block;
+            color: #52677d;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .edit-form-input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d5dee8;
+            border-radius: 8px;
+            outline: none;
+            color: #294968;
+            font-size: 14px;
+        }
+
+        .edit-form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+        .modal-error {
+            display: none;
+            padding: 9px 11px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #be123c;
+            font-size: 12px;
+        }
+
+        .modal-error.show {
+            display: block;
+        }
+
+        .edit-name-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .modal-btn {
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-cancel {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #52677d;
+        }
+
+        .modal-save {
+            border: 1px solid #2563eb;
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .modal-cancel:hover {
+            background: #f8fafc;
+        }
+
+        .modal-save:hover {
+            background: #2563eb;
+        }
+
+        .profile-picture-input {
+            display: none;
+        }
+        /* =========================
+           SUCCESS POPUP
+        ========================= */
+
+        .success-popup {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 2000;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 13px 17px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 10px;
+            color: #047857;
+            font-size: 13px;
+            font-weight: 600;
+
+            box-shadow: 0 8px 25px rgba(22, 58, 95, 0.12);
+
+            animation: successPopupIn 0.35s ease-out;
+        }
+
+        .success-popup i {
+            font-size: 17px;
+        }
+
+        @keyframes successPopupIn {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-popup.hide {
+            animation: successPopupOut 0.3s ease-in forwards;
+        }
+
+        @keyframes successPopupOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .success-popup {
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                justify-content: center;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+            .profile-name-row {
+                gap: 8px;
+            }
+
+            .info-value {
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <a href="{{ url_for('home') }}" class="logo">
+        Job<span>Analyzer</span>
+    </a>
+
+    <div class="nav-right">
+
+        <a href="{{ url_for('home') }}" class="nav-link">
+            Home
+        </a>
+
+        <a href="{{ url_for('dashboard') }}" class="nav-link">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<!-- =========================
+     SUCCESS POPUP
+========================= -->
+
+{% if profile_success %}
+<div class="success-popup" id="success-popup">
+    <i class="bi bi-check-circle-fill"></i>
+    <span>{{ profile_success }}</span>
+</div>
+{% endif %}
+
+<main class="page-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <h1>My Profile</h1>
+
+        <p>
+            Manage your personal information and skill profile.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         PROFILE CARD
+    ========================= -->
+
+    <div class="profile-card">
+
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-top">
+
+            <div class="profile-picture-wrap">
+
+                <div class="profile-picture">
+
+                    {% if user.profile_picture %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/profile_pictures/' ~ user.profile_picture) }}"
+                            alt="Profile picture"
+                            style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+                        >
+                    {% else %}
+                        <i class="bi bi-person"></i>
+                    {% endif %}
+
+                </div>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('upload_profile_picture') }}"
+                    enctype="multipart/form-data"
+                    id="profile-picture-form"
+                >
+
+                    <label
+                        for="profile-picture-input"
+                        class="profile-picture-edit"
+                        title="Upload / Change Profile Picture"
+                        aria-label="Upload or Change Profile Picture"
+                    >
+                        <i class="bi bi-camera"></i>
+                    </label>
+
+                    <input
+                        type="file"
+                        name="profile_picture"
+                        id="profile-picture-input"
+                        class="profile-picture-input"
+                        accept=".jpg,.jpeg,.png,.webp"
+                    >
+
+                </form>
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <div class="profile-name-row">
+
+                    <h2>
+                        {{ user.name }}
+                    </h2>
+
+
+                </div>
+
+                <p>
+                    {{ user.email }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             PERSONAL INFORMATION
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+
+                    <i class="bi bi-person-vcard"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Personal Information
+                    </h3>
+
+                    <p>
+                        Your account information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <div class="info-value">
+
+                        <span class="info-content">
+                            {{ user.name }}
+                        </span>
+
+                        <button
+                            type="button"
+                            class="info-edit-btn"
+                            id="edit-name-btn"
+                        >
+                            <i class="bi bi-pencil"></i>
+                            Edit
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <div class="info-value">
+
+                        <span class="info-content">
+                            {{ user.email }}
+                        </span>
+
+                        <button
+                            type="button"
+                            class="info-edit-btn"
+                            id="edit-email-btn"
+                        >
+                            <i class="bi bi-pencil"></i>
+                            Edit
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <div class="info-value">
+
+                        <span class="info-content password-dots">
+                            ••••••••••
+                        </span>
+
+                        <button
+                            type="button"
+                            class="info-edit-btn"
+                            id="change-password-btn"
+                        >
+                            <i class="bi bi-key"></i>
+                            Change
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             MY SKILLS
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div class="section-icon">
+
+                    <i class="bi bi-stars"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        My Skills
+                    </h3>
+
+                    <p>
+                        Skills saved to your JobAnalyzer profile
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if saved_skills %}
+
+                <div class="skills-list">
+
+                    {% for skill in saved_skills %}
+
+                        <span class="skill-chip">
+
+                            <i class="bi bi-check2"></i>
+
+                            {{ skill }}
+
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-skills">
+
+                    You haven't added any skills yet.
+
+                </div>
+
+            {% endif %}
+
+
+            <button
+                type="button"
+                class="edit-skills-btn"
+                id="edit-skills-btn"
+            >
+
+                <i class="bi bi-pencil-square"></i>
+
+                Edit Skills
+
+            </button>
+
+        </section>
+
+
+
+
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     EDIT SKILLS MODAL
+========================= -->
+
+<div class="modal-overlay" id="edit-skills-modal">
+
+    <div class="edit-modal">
+
+        <h3>Edit Your Skills</h3>
+
+        <p>Update the skills saved to your JobAnalyzer profile.</p>
+
+        <form method="POST" action="{{ url_for('update_profile_skills') }}">
+
+            <div class="edit-form-group">
+
+                <label for="skills-input">
+                    Your Skills
+                </label>
+
+                <textarea
+                    name="skills"
+                    id="skills-input"
+                    class="skills-edit-input"
+                    placeholder="Python, SQL, Communication, Excel, Leadership"
+                >{{ saved_skills|join(', ') }}</textarea>
+
+                <p class="skills-edit-help">
+                    Separate each skill with a comma. You can add, remove, or edit skills here.
+                </p>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-btn modal-cancel"
+                    id="cancel-skills-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="modal-btn modal-save"
+                >
+                    Save Skills
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     EDIT NAME MODAL
+========================= -->
+
+<div class="modal-overlay" id="edit-name-modal">
+
+    <div class="edit-modal">
+
+        <h3>Edit Your Name</h3>
+
+        <p>Update the name displayed on your JobAnalyzer profile.</p>
+
+        <form method="POST" action="{{ url_for('edit_profile_name') }}">
+
+            <input
+                type="text"
+                name="name"
+                class="edit-name-input"
+                value="{{ user.name }}"
+                maxlength="100"
+                required
+                id="edit-name-input"
+            >
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-btn modal-cancel"
+                    id="cancel-name-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="modal-btn modal-save"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     EDIT EMAIL MODAL
+========================= -->
+
+<div class="modal-overlay" id="edit-email-modal">
+
+    <div class="edit-modal">
+
+        <h3>Edit Email Address</h3>
+
+        <p>Update the email address used for your JobAnalyzer account.</p>
+
+        <div class="modal-error{% if profile_error_modal == "email" and profile_error %} show{% endif %}" id="email-error">{{ profile_error if profile_error_modal == "email" else "" }}</div>
+
+        <form method="POST" action="{{ url_for('edit_profile_email') }}">
+
+            <div class="edit-form-group">
+
+                <label for="new-email">
+                    New Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="new-email"
+                    class="edit-form-input"
+                    value="{{ user.email }}"
+                    maxlength="150"
+                    required
+                >
+
+            </div>
+
+            <div class="edit-form-group">
+
+                <label for="email-current-password">
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    name="current_password"
+                    id="email-current-password"
+                    class="edit-form-input"
+                    required
+                >
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-btn modal-cancel"
+                    id="cancel-email-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="modal-btn modal-save"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHANGE PASSWORD MODAL
+========================= -->
+
+<div class="modal-overlay" id="change-password-modal">
+
+    <div class="edit-modal">
+
+        <h3>Change Password</h3>
+
+        <p>Choose a new password for your JobAnalyzer account.</p>
+
+        <div class="modal-error{% if profile_error_modal == "password" and profile_error %} show{% endif %}" id="password-error">{{ profile_error if profile_error_modal == "password" else "" }}</div>
+
+        <form method="POST" action="{{ url_for('change_password') }}">
+
+            <div class="edit-form-group">
+
+                <label for="password-current">
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    name="current_password"
+                    id="password-current"
+                    class="edit-form-input"
+                    required
+                >
+
+            </div>
+
+            <div class="edit-form-group">
+
+                <label for="password-new">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="new_password"
+                    id="password-new"
+                    class="edit-form-input"
+                    required
+                >
+
+            </div>
+
+            <div class="edit-form-group">
+
+                <label for="password-confirm">
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    id="password-confirm"
+                    class="edit-form-input"
+                    required
+                >
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-btn modal-cancel"
+                    id="cancel-password-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="modal-btn modal-save"
+                >
+                    Change Password
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-brand">
+        JobAnalyzer
+    </div>
+
+    <p>
+        Built with Python &amp; Flask
+    </p>
+
+</footer>
+
+
+
+<script>
+    const serverErrorModal = "{{ profile_error_modal|default("") }}";
+    if (serverErrorModal === "email") {
+        document.getElementById("edit-email-modal").classList.add("show");
+    } else if (serverErrorModal === "password") {
+        document.getElementById("change-password-modal").classList.add("show");
+    }
+
+    const profilePictureInput =
+        document.getElementById("profile-picture-input");
+
+    const profilePictureForm =
+        document.getElementById("profile-picture-form");
+
+    if (profilePictureInput && profilePictureForm) {
+        profilePictureInput.addEventListener("change", function () {
+
+            if (this.files.length > 0) {
+                profilePictureForm.submit();
+            }
+
+        });
+    }
+
+    const editNameButton =
+        document.getElementById("edit-name-btn");
+
+    const editNameModal =
+        document.getElementById("edit-name-modal");
+
+    const cancelNameButton =
+        document.getElementById("cancel-name-btn");
+
+    const editNameInput =
+        document.getElementById("edit-name-input");
+
+    if (editNameButton && editNameModal) {
+        editNameButton.addEventListener("click", function () {
+            editNameModal.classList.add("show");
+            editNameInput.focus();
+            editNameInput.select();
+        });
+    }
+
+    if (cancelNameButton && editNameModal) {
+        cancelNameButton.addEventListener("click", function () {
+            editNameModal.classList.remove("show");
+        });
+    }
+
+    if (editNameModal) {
+        editNameModal.addEventListener("click", function (event) {
+            if (event.target === editNameModal) {
+                editNameModal.classList.remove("show");
+            }
+        });
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && editNameModal) {
+            editNameModal.classList.remove("show");
+        }
+
+        if (event.key === "Escape" && editEmailModal) {
+            editEmailModal.classList.remove("show");
+        }
+
+        if (event.key === "Escape" && changePasswordModal) {
+            changePasswordModal.classList.remove("show");
+        }
+
+        if (event.key === "Escape" && editSkillsModal) {
+            editSkillsModal.classList.remove("show");
+        }
+    });
+
+
+    /* =========================
+       EDIT EMAIL
+    ========================= */
+
+    const editEmailButton =
+        document.getElementById("edit-email-btn");
+
+    const editEmailModal =
+        document.getElementById("edit-email-modal");
+
+    const cancelEmailButton =
+        document.getElementById("cancel-email-btn");
+
+    if (editEmailButton && editEmailModal) {
+        editEmailButton.addEventListener("click", function () {
+            editEmailModal.classList.add("show");
+
+            const emailInput =
+                document.getElementById("new-email");
+
+            if (emailInput) {
+                emailInput.focus();
+                emailInput.select();
+            }
+        });
+    }
+
+    if (cancelEmailButton && editEmailModal) {
+        cancelEmailButton.addEventListener("click", function () {
+            editEmailModal.classList.remove("show");
+        });
+    }
+
+    if (editEmailModal) {
+        editEmailModal.addEventListener("click", function (event) {
+            if (event.target === editEmailModal) {
+                editEmailModal.classList.remove("show");
+            }
+        });
+    }
+
+
+    /* =========================
+       CHANGE PASSWORD
+    ========================= */
+
+    const changePasswordButton =
+        document.getElementById("change-password-btn");
+
+    const changePasswordModal =
+        document.getElementById("change-password-modal");
+
+    const cancelPasswordButton =
+        document.getElementById("cancel-password-btn");
+
+    if (changePasswordButton && changePasswordModal) {
+        changePasswordButton.addEventListener("click", function () {
+            changePasswordModal.classList.add("show");
+
+            const currentPassword =
+                document.getElementById("password-current");
+
+            if (currentPassword) {
+                currentPassword.focus();
+            }
+        });
+    }
+
+    if (cancelPasswordButton && changePasswordModal) {
+        cancelPasswordButton.addEventListener("click", function () {
+            changePasswordModal.classList.remove("show");
+        });
+    }
+
+    if (changePasswordModal) {
+        changePasswordModal.addEventListener("click", function (event) {
+            if (event.target === changePasswordModal) {
+                changePasswordModal.classList.remove("show");
+            }
+        });
+    }
+
+
+    /* =========================
+       EDIT SKILLS
+    ========================= */
+
+    const editSkillsButton =
+        document.getElementById("edit-skills-btn");
+
+    const editSkillsModal =
+        document.getElementById("edit-skills-modal");
+
+    const cancelSkillsButton =
+        document.getElementById("cancel-skills-btn");
+
+    if (editSkillsButton && editSkillsModal) {
+        editSkillsButton.addEventListener("click", function () {
+            editSkillsModal.classList.add("show");
+
+            const skillsInput =
+                document.getElementById("skills-input");
+
+            if (skillsInput) {
+                skillsInput.focus();
+            }
+        });
+    }
+
+    if (cancelSkillsButton && editSkillsModal) {
+        cancelSkillsButton.addEventListener("click", function () {
+            editSkillsModal.classList.remove("show");
+        });
+    }
+
+    if (editSkillsModal) {
+        editSkillsModal.addEventListener("click", function (event) {
+            if (event.target === editSkillsModal) {
+                editSkillsModal.classList.remove("show");
+            }
+        });
+    }
+
+
+    const successPopup = document.getElementById("success-popup");
+
+    if (successPopup) {
+        setTimeout(function () {
+            successPopup.classList.add("hide");
+
+            setTimeout(function () {
+                successPopup.remove();
+            }, 300);
+        }, 3000);
+    }
+
+</script>
+
+</body>
+</html>

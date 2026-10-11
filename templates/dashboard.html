@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>JobAnalyzer | Dashboard</title>
+
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f8f5;
+
+            color: #1f2937;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            height: 72px;
+
+            background: #c7d6e8;
+
+            border-bottom:
+                1px solid #a9bfd7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            color: #163a5f;
+
+            text-decoration: none;
+        }
+
+
+        .logo span {
+
+            color: #245b91;
+        }
+
+
+        .navbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 22px;
+        }
+
+
+        .nav-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #294968;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-link:hover {
+
+            color: #163a5f;
+        }
+
+
+        .nav-link i {
+
+            font-size: 15px;
+        }
+
+
+        .profile-nav-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            text-decoration: none;
+
+            background: #3b82f6;
+
+            color: #ffffff;
+
+            border: 1px solid #2563eb;
+
+            padding: 9px 17px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .profile-nav-btn:hover {
+
+            background: #2563eb;
+
+            color: #ffffff;
+        }
+
+
+        .profile-nav-btn i {
+
+            font-size: 16px;
+        }
+
+        .profile-nav-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+        }
+
+
+        .welcome-user {
+
+            color: #294968;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .logout-btn {
+
+            text-decoration: none;
+
+            background: #ffffff;
+
+            color: #245b91;
+
+            border:
+                1px solid #a9bfd7;
+
+            padding: 9px 18px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+
+        .logout-btn:hover {
+
+            background: #edf3f9;
+
+            color: #163a5f;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .dashboard-container {
+
+            width: 86%;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            padding:
+                55px 0 70px;
+        }
+
+
+        /* =========================
+           DASHBOARD HEADER
+        ========================= */
+
+        .dashboard-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+        }
+
+
+        .dashboard-title h1 {
+
+            font-size: 34px;
+
+            color: #163a5f;
+
+            margin-bottom: 8px;
+        }
+
+
+        .dashboard-title p {
+
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        .add-btn {
+
+            text-decoration: none;
+
+            background: #245b91;
+
+            color: #ffffff;
+
+            padding:
+                12px 20px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            box-shadow:
+                0 8px 18px
+                rgba(36, 91, 145, 0.16);
+
+            transition: 0.2s ease;
+        }
+
+
+        .add-btn:hover {
+
+            background: #163f68;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .stat-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.05);
+
+            transition: 0.2s ease;
+        }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(15, 23, 42, 0.08);
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .stat-title {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .stat-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+
+        .total-icon {
+
+            background: #e0edff;
+
+            color: #2563eb;
+        }
+
+
+        .interview-icon {
+
+            background: #f0e7ff;
+
+            color: #7c3aed;
+        }
+
+
+        .selected-icon {
+
+            background: #e4f8ed;
+
+            color: #16a34a;
+        }
+
+
+        .rejected-icon {
+
+            background: #fff0e4;
+
+            color: #ea580c;
+        }
+
+
+        .stat-number {
+
+            font-size: 32px;
+
+            font-weight: 800;
+
+            color: #163a5f;
+        }
+
+
+        /* =========================
+           DASHBOARD CONTENT
+        ========================= */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 25px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .dashboard-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15, 23, 42, 0.05);
+        }
+
+
+        .card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .card-header h2 {
+
+            font-size: 19px;
+
+            color: #163a5f;
+        }
+
+
+        .card-header p {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           MONTHLY CHART
+        ========================= */
+
+        .chart-container {
+
+            height: 260px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 25px;
+
+            padding:
+                20px 10px 5px;
+        }
+
+
+        .chart-column {
+
+            flex: 1;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+        }
+
+
+        .chart-bar {
+
+            width: 45px;
+
+            background: #3b82f6;
+
+            border-radius:
+                7px 7px 0 0;
+
+            min-height: 10px;
+
+            transition: 0.2s ease;
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+        }
+
+
+        .chart-bar:hover {
+
+            background: #2563eb;
+        }
+
+
+        .chart-count {
+
+            position: absolute;
+
+            top: -24px;
+
+            color: #163a5f;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chart-months {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(6, 1fr);
+
+            gap: 25px;
+
+            padding: 0 10px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           STATUS DISTRIBUTION
+        ========================= */
+
+        .status-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+
+        .status-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .status-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .status-dot {
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+        }
+
+
+        .status-name {
+
+            font-size: 14px;
+
+            color: #475569;
+        }
+
+
+        .status-count {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #163a5f;
+        }
+
+
+        .applied-dot {
+
+            background: #3b82f6;
+        }
+
+
+        .interview-dot {
+
+            background: #8b5cf6;
+        }
+
+
+        .selected-dot {
+
+            background: #22c55e;
+        }
+
+
+        .rejected-dot {
+
+            background: #f97316;
+        }
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .quick-action {
+
+            text-decoration: none;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .quick-action:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color: #bfd1e5;
+
+            box-shadow:
+                0 8px 20px
+                rgba(15, 23, 42, 0.06);
+        }
+
+
+        .quick-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 9px;
+
+            background: #e0edff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+        .quick-action h3 {
+
+            color: #163a5f;
+
+            font-size: 15px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .quick-action p {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #163a5f;
+
+            border-top:
+                1px solid #28547d;
+
+            color: #d8e4f0;
+
+            text-align: center;
+
+            padding: 25px 20px;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 0 5%;
+            }
+
+
+            .welcome-user {
+
+                display: none;
+            }
+
+
+            .navbar-right {
+
+                gap: 10px;
+            }
+
+
+            .nav-link {
+
+                font-size: 13px;
+            }
+
+
+            .nav-link i {
+
+                display: none;
+            }
+
+
+            .profile-nav-btn {
+
+                padding: 8px 12px;
+
+                font-size: 13px;
+            }
+
+
+            .dashboard-container {
+
+                width: 90%;
+
+                padding-top: 40px;
+            }
+
+
+            .dashboard-header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+
+            .dashboard-title h1 {
+
+                font-size: 28px;
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .chart-container {
+
+                gap: 10px;
+            }
+
+
+            .chart-bar {
+
+                width: 30px;
+            }
+
+
+            .chart-months {
+
+                gap: 10px;
+
+                padding: 0;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="logo"
+        >
+            Job<span>Analyzer</span>
+        </a>
+
+
+        <div class="navbar-right">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="nav-link"
+            >
+                <i class="bi bi-house"></i>
+                Home
+            </a>
+
+            <a
+                href="{{ url_for('applications') }}"
+                class="nav-link"
+            >
+                <i class="bi bi-folder2-open"></i>
+                Applications
+            </a>
+
+            <a
+                href="{{ url_for('skill_analyzer') }}"
+                class="nav-link"
+            >
+                <i class="bi bi-bar-chart"></i>
+                Skill Analyzer
+            </a>
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="profile-nav-btn"
+            >
+                {% if profile_picture %}
+                    <img src="{{ url_for('static', filename='uploads/profile_pictures/' ~ profile_picture) }}" alt="Profile picture" class="profile-nav-avatar">
+                {% else %}
+                    <i class="bi bi-person-circle"></i>
+                {% endif %}
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN DASHBOARD
+    ========================= -->
+
+    <main class="dashboard-container">
+
+
+        <!-- Dashboard Header -->
+
+        <div class="dashboard-header">
+
+
+            <div class="dashboard-title">
+
+                <h1>
+                    Dashboard
+                </h1>
+
+
+                <p>
+                    Track and understand your job search progress.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('add_application') }}"
+                class="add-btn"
+            >
+
+                <i class="bi bi-plus-lg"></i>
+
+                Add Application
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================= -->
+
+        <div class="stats-grid">
+
+
+            <!-- Total Applications -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        Total Applications
+                    </span>
+
+
+                    <div class="stat-icon total-icon">
+
+                        <i class="bi bi-briefcase"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-number">
+
+                    {{ total_applications }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Interviews -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        Interviews
+                    </span>
+
+
+                    <div class="stat-icon interview-icon">
+
+                        <i class="bi bi-calendar-check"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-number">
+
+                    {{ interviews }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Selected -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        Selected
+                    </span>
+
+
+                    <div class="stat-icon selected-icon">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-number">
+
+                    {{ selected }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Rejected -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+                        Rejected
+                    </span>
+
+
+                    <div class="stat-icon rejected-icon">
+
+                        <i class="bi bi-x-circle"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-number">
+
+                    {{ rejected }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             CHART + STATUS
+        ========================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- =========================
+                 MONTHLY APPLICATION ACTIVITY
+            ========================= -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Monthly Application Activity
+                        </h2>
+
+
+                        <p>
+                            Your applications over the last 6 months
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Dynamic Chart -->
+
+                <div class="chart-container">
+
+                    {% for month in months %}
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="height: {{ month.height }}%;"
+                                title="{{ month.count }} application{{ 's' if month.count != 1 else '' }}"
+                            >
+
+                                <span class="chart-count">
+
+                                    {{ month.count }}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+
+                <!-- Dynamic Month Names -->
+
+                <div class="chart-months">
+
+                    {% for month in months %}
+
+                        <span>
+
+                            {{ month.name }}
+
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 STATUS DISTRIBUTION
+            ========================= -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Status Distribution
+                        </h2>
+
+
+                        <p>
+                            Current application status
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-list">
+
+
+                    <!-- Applied -->
+
+                    <div class="status-item">
+
+                        <div class="status-left">
+
+                            <span
+                                class="status-dot applied-dot"
+                            ></span>
+
+
+                            <span class="status-name">
+
+                                Applied
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="status-count">
+
+                            {{ applied }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Interview -->
+
+                    <div class="status-item">
+
+                        <div class="status-left">
+
+                            <span
+                                class="status-dot interview-dot"
+                            ></span>
+
+
+                            <span class="status-name">
+
+                                Interview
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="status-count">
+
+                            {{ interviews }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Selected -->
+
+                    <div class="status-item">
+
+                        <div class="status-left">
+
+                            <span
+                                class="status-dot selected-dot"
+                            ></span>
+
+
+                            <span class="status-name">
+
+                                Selected
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="status-count">
+
+                            {{ selected }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Rejected -->
+
+                    <div class="status-item">
+
+                        <div class="status-left">
+
+                            <span
+                                class="status-dot rejected-dot"
+                            ></span>
+
+
+                            <span class="status-name">
+
+                                Rejected
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="status-count">
+
+                            {{ rejected }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             QUICK ACTIONS
+        ========================= -->
+
+        <div class="quick-actions">
+
+
+            <!-- Add Application -->
+
+            <a
+                href="{{ url_for('add_application') }}"
+                class="quick-action"
+            >
+
+                <div class="quick-icon">
+
+                    <i class="bi bi-plus-lg"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Add Application
+                    </h3>
+
+
+                    <p>
+                        Track a new job application
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- My Applications -->
+
+            <a
+                href="{{ url_for('applications') }}"
+                class="quick-action"
+            >
+
+                <div class="quick-icon">
+
+                    <i class="bi bi-folder2-open"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        My Applications
+                    </h3>
+
+
+                    <p>
+                        View and manage applications
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- Skill Analyzer -->
+
+            <a
+                href="{{ url_for('skill_analyzer') }}"
+                class="quick-action"
+            >
+
+                <div class="quick-icon">
+
+                    <i class="bi bi-bar-chart"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Skill Analyzer
+                    </h3>
+
+
+                    <p>
+                        Analyze skills from job descriptions
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 JobAnalyzer · Built with Python & Flask
+
+    </footer>
+
+
+</body>
+
+</html>

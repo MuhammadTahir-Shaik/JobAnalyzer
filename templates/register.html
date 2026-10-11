@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | JobAnalyzer</title>
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #163a5f;
+
+            font-size: 24px;
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: #294968;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            padding: 9px 16px;
+            border-radius: 8px;
+
+            transition: 0.2s ease;
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.45);
+            color: #163a5f;
+        }
+
+
+        /* =========================
+           REGISTER SECTION
+        ========================= */
+
+        .register-section {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 45px 20px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+
+        /* =========================
+           REGISTER CARD
+        ========================= */
+
+        .register-card {
+            background: #ffffff;
+
+            border: 1px solid #e3e8ef;
+            border-radius: 18px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 40px rgba(22, 58, 95, 0.08);
+
+            transition: 0.25s ease;
+        }
+
+        .register-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 20px 45px rgba(22, 58, 95, 0.11);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .register-icon {
+            width: 54px;
+            height: 54px;
+
+            margin: 0 auto 17px;
+
+            border-radius: 14px;
+
+            background: #e7f0fb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #245b91;
+
+            font-size: 22px;
+        }
+
+        .register-header h1 {
+            color: #163a5f;
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+
+            letter-spacing: -0.5px;
+        }
+
+        .register-header p {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #294968;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           NORMAL INPUT
+        ========================= */
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 1px solid #d5dce5;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #1f2937;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+
+        /* =========================
+           PASSWORD INPUT
+        ========================= */
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+
+            padding: 12px 48px 12px 14px;
+
+            border: 1px solid #d5dce5;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #1f2937;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+        .password-wrapper input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-wrapper input:focus {
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+
+        /* =========================
+           PROFESSIONAL EYE BUTTON
+        ========================= */
+
+        .toggle-password {
+            position: absolute;
+
+            right: 8px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 36px;
+            height: 36px;
+
+            padding: 0;
+
+            border: none;
+            border-radius: 7px;
+
+            background: transparent;
+
+            color: #718096;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .toggle-password:hover {
+            background: #eef4fb;
+            color: #245b91;
+        }
+
+        .toggle-password:focus {
+            outline: none;
+
+            background: #eef4fb;
+            color: #245b91;
+        }
+
+        .toggle-password i {
+            line-height: 1;
+        }
+
+
+        /* =========================
+           PASSWORD ERROR
+        ========================= */
+
+        .password-error {
+            display: none;
+
+            margin-top: -8px;
+            margin-bottom: 18px;
+
+            color: #dc2626;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           REGISTER BUTTON
+        ========================= */
+
+        .register-btn {
+            width: 100%;
+
+            padding: 13px 20px;
+
+            margin-top: 5px;
+
+            border: 1px solid #2563eb;
+            border-radius: 9px;
+
+            background: #3b82f6;
+            color: #ffffff;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+            box-shadow:
+                0 7px 16px rgba(59, 130, 246, 0.18);
+        }
+
+        .register-btn:hover {
+            background: #2563eb;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 9px 20px rgba(59, 130, 246, 0.24);
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-section {
+            text-align: center;
+
+            margin-top: 23px;
+            padding-top: 21px;
+
+            border-top: 1px solid #edf0f3;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .login-section a {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .login-section a:hover {
+            color: #163f68;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer-note {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #7b8794;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .back-home {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .register-section {
+                padding: 30px 18px;
+            }
+
+            .register-card {
+                padding: 30px 24px;
+                border-radius: 15px;
+            }
+
+            .register-header h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+            Job<span>Analyzer</span>
+        </a>
+
+        <a href="/" class="back-home">
+            ← Back to Home
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         REGISTER
+    ========================= -->
+
+    <main class="register-section">
+
+        <div class="register-container">
+
+            <div class="register-card">
+
+                <!-- Header -->
+
+                <div class="register-header">
+
+                    <div class="register-icon">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+
+                    <h1>Create Your Account</h1>
+
+                    <p>
+                        Start organizing and analyzing
+                        your job search.
+                    </p>
+
+                </div>
+
+
+                <!-- Registration Form -->
+
+                <form
+                    method="POST"
+                    onsubmit="return validatePasswords()"
+                >
+
+                    <!-- Full Name -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                onclick="togglePassword(
+                                    'password',
+                                    'eyeIcon'
+                                )"
+                                aria-label="Show password"
+                            >
+                                <i
+                                    class="bi bi-eye"
+                                    id="eyeIcon"
+                                ></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="form-group">
+
+                        <label for="confirm_password">
+                            Confirm Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                                placeholder="Re-enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                onclick="togglePassword(
+                                    'confirm_password',
+                                    'confirmEyeIcon'
+                                )"
+                                aria-label="Show password"
+                            >
+                                <i
+                                    class="bi bi-eye"
+                                    id="confirmEyeIcon"
+                                ></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password Error -->
+
+                    <p
+                        id="password-error"
+                        class="password-error"
+                    >
+                        Passwords do not match.
+                    </p>
+
+
+                    <!-- Register Button -->
+
+                    <button
+                        type="submit"
+                        class="register-btn"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <!-- Login -->
+
+                <div class="login-section">
+
+                    Already have an account?
+
+                    <a href="/login">
+                        Login
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <div class="footer-note">
+                © 2026 JobAnalyzer · Smart job search management
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           PASSWORD VISIBILITY
+        ========================= */
+
+        function togglePassword(inputId, iconId) {
+
+            const passwordInput =
+                document.getElementById(inputId);
+
+            const eyeIcon =
+                document.getElementById(iconId);
+
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                eyeIcon.classList.remove("bi-eye");
+
+                eyeIcon.classList.add("bi-eye-slash");
+
+            } else {
+
+                passwordInput.type = "password";
+
+                eyeIcon.classList.remove("bi-eye-slash");
+
+                eyeIcon.classList.add("bi-eye");
+            }
+        }
+
+
+        /* =========================
+           PASSWORD MATCH CHECK
+           ONLY AFTER SUBMIT
+        ========================= */
+
+        function validatePasswords() {
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirm_password").value;
+
+            const passwordError =
+                document.getElementById("password-error");
+
+
+            /*
+                Check whether the passwords match.
+            */
+
+            if (password !== confirmPassword) {
+
+                /*
+                    Show the error message.
+                */
+
+                passwordError.style.display = "block";
+
+                /*
+                    Prevent the form from
+                    being submitted.
+                */
+
+                return false;
+            }
+
+
+            /*
+                Passwords match.
+                Hide the error and allow
+                the form to submit.
+            */
+
+            passwordError.style.display = "none";
+
+            return true;
+        }
+
+    </script>
+
+</body>
+</html>

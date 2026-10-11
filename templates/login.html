@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | JobAnalyzer</title>
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #163a5f;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #163a5f;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: #294968;
+            font-size: 14px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            transition: 0.2s ease;
+        }
+
+        .back-home:hover {
+            color: #163a5f;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .login-section {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 55px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+
+            background: #ffffff;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 12px 35px rgba(22, 58, 95, 0.08);
+        }
+
+        /* =========================
+           LOGIN HEADER
+        ========================= */
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 52px;
+            height: 52px;
+
+            margin: 0 auto 17px;
+
+            border-radius: 14px;
+
+            background: #e8f1fb;
+            color: #245b91;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            color: #163a5f;
+            margin-bottom: 9px;
+        }
+
+        .login-header p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           ERROR MESSAGE
+        ========================= */
+
+        .login-error {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            margin-bottom: 18px;
+        }
+
+        .login-error i {
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #294968;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #163a5f;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .form-input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           PASSWORD TOGGLE
+        ========================= */
+
+        .password-input {
+            padding-right: 46px;
+        }
+
+        .toggle-password {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #64748b;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            padding: 4px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: 0.2s ease;
+        }
+
+        .toggle-password:hover {
+            color: #245b91;
+        }
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 4px;
+            margin-bottom: 24px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .remember-me input {
+            width: 15px;
+            height: 15px;
+
+            accent-color: #3b82f6;
+
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #2563eb;
+            border-radius: 9px;
+
+            background: #3b82f6;
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #2563eb;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 18px rgba(37, 99, 235, 0.18);
+        }
+
+        /* =========================
+           REGISTER LINK
+        ========================= */
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .register-text a {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           FOOTER NOTE
+        ========================= */
+
+        .login-note {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .login-section {
+                padding: 35px 15px;
+            }
+
+            .login-card {
+                padding: 32px 24px;
+                border-radius: 15px;
+            }
+
+            .login-header h1 {
+                font-size: 25px;
+            }
+
+            .form-options {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+            Job<span>Analyzer</span>
+        </a>
+
+        <a href="/" class="back-home">
+            <i class="bi bi-arrow-left"></i>
+            Back to Home
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         LOGIN SECTION
+    ========================= -->
+
+    <main class="login-section">
+
+        <div class="login-card">
+
+            <!-- Header -->
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+
+                <h1>Welcome Back</h1>
+
+                <p>
+                    Sign in to continue managing your job search.
+                </p>
+
+            </div>
+
+
+            <!-- Error Message -->
+
+            {% if error %}
+
+                <div class="login-error">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <span>{{ error }}</span>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- Login Form -->
+
+            <form method="POST" action="{{ url_for('login') }}">
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input password-input"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="togglePassword()"
+                            aria-label="Show password"
+                        >
+                            <i
+                                class="bi bi-eye"
+                                id="eyeIcon"
+                            ></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Remember Me / Forgot Password -->
+
+                <div class="form-options">
+
+                    <label class="remember-me">
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                        >
+
+                        <span>Remember me</span>
+
+                    </label>
+
+                    <a href="#" class="forgot-password">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- Login Button -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- Register -->
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="{{ url_for('register') }}">
+                    Create an account
+                </a>
+
+            </div>
+
+
+            <!-- Note -->
+
+            <div class="login-note">
+
+                Your account information is securely protected.
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function togglePassword() {
+
+            const passwordInput =
+                document.getElementById("password");
+
+            const eyeIcon =
+                document.getElementById("eyeIcon");
+
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                eyeIcon.classList.remove("bi-eye");
+
+                eyeIcon.classList.add("bi-eye-slash");
+
+            } else {
+
+                passwordInput.type = "password";
+
+                eyeIcon.classList.remove("bi-eye-slash");
+
+                eyeIcon.classList.add("bi-eye");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

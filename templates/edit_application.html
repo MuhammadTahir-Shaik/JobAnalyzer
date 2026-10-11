@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Application | JobAnalyzer</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8f5;
+            color: #24364b;
+        }
+
+        .navbar {
+            height: 72px;
+            background: #c7d6e8;
+            border-bottom: 1px solid #a9bfd7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #163a5f;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #245b91;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            color: #294968;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #9eb5cc;
+            padding: 9px 17px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .page-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 22px;
+
+            color: #245b91;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: #163a5f;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border: 1px solid #dce5ee;
+            border-radius: 16px;
+            padding: 32px;
+
+            box-shadow: 0 8px 25px rgba(30, 58, 90, 0.07);
+        }
+
+        .section-title {
+            color: #163a5f;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #334e68;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 13px;
+
+            border: 1px solid #cfdbe7;
+            border-radius: 8px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+            background: #ffffff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            padding-top: 24px;
+            border-top: 1px solid #e5eaf0;
+        }
+
+        .btn {
+            padding: 11px 20px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #ffffff;
+            color: #245b91;
+            border: 1px solid #b7c9db;
+        }
+
+        .save-btn {
+            background: #245b91;
+            color: #ffffff;
+            border: 1px solid #245b91;
+        }
+
+        .save-btn:hover {
+            background: #163f68;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            .page-container {
+                margin: 30px auto;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            Job<span>Analyzer</span>
+        </a>
+
+        <div class="nav-right">
+
+            <span class="user-name">
+                {{ session["user_name"] }}
+            </span>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page-container">
+
+        <a
+            href="{{ url_for('applications') }}"
+            class="back-link"
+        >
+            ← Back to Applications
+        </a>
+
+
+        <div class="page-header">
+
+            <h1>Edit Application</h1>
+
+            <p>
+                Update the details of your job application.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <form
+                method="POST"
+                action="{{ url_for('edit_application', application_id=application.id) }}"
+            >
+
+                <!-- Job Information -->
+
+                <div class="form-section">
+
+                    <h2 class="section-title">
+                        Job Information
+                    </h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="company">
+                                Company *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="company"
+                                name="company"
+                                value="{{ application.company }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="job_title">
+                                Job Title *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="job_title"
+                                name="job_title"
+                                value="{{ application.job_title }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="location">
+                                Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                value="{{ application.location or '' }}"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="job_type">
+                                Job Type
+                            </label>
+
+                            <select
+                                id="job_type"
+                                name="job_type"
+                            >
+
+                                <option
+                                    value=""
+                                    {% if not application.job_type %}selected{% endif %}
+                                >
+                                    Select Job Type
+                                </option>
+
+                                <option
+                                    value="Full-time"
+                                    {% if application.job_type == "Full-time" %}selected{% endif %}
+                                >
+                                    Full-time
+                                </option>
+
+                                <option
+                                    value="Part-time"
+                                    {% if application.job_type == "Part-time" %}selected{% endif %}
+                                >
+                                    Part-time
+                                </option>
+
+                                <option
+                                    value="Internship"
+                                    {% if application.job_type == "Internship" %}selected{% endif %}
+                                >
+                                    Internship
+                                </option>
+
+                                <option
+                                    value="Contract"
+                                    {% if application.job_type == "Contract" %}selected{% endif %}
+                                >
+                                    Contract
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Application Details -->
+
+                <div class="form-section">
+
+                    <h2 class="section-title">
+                        Application Details
+                    </h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="application_date">
+                                Application Date *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="application_date"
+                                name="application_date"
+                                value="{{ application.application_date }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="status">
+                                Status *
+                            </label>
+
+                            <select
+                                id="status"
+                                name="status"
+                                required
+                            >
+
+                                <option
+                                    value="Applied"
+                                    {% if application.status == "Applied" %}selected{% endif %}
+                                >
+                                    Applied
+                                </option>
+
+                                <option
+                                    value="Interview"
+                                    {% if application.status == "Interview" %}selected{% endif %}
+                                >
+                                    Interview
+                                </option>
+
+                                <option
+                                    value="Selected"
+                                    {% if application.status == "Selected" %}selected{% endif %}
+                                >
+                                    Selected
+                                </option>
+
+                                <option
+                                    value="Rejected"
+                                    {% if application.status == "Rejected" %}selected{% endif %}
+                                >
+                                    Rejected
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="job_description">
+                                Job Description
+                            </label>
+
+                            <textarea
+                                id="job_description"
+                                name="job_description"
+                            >{{ application.job_description or '' }}</textarea>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="notes">
+                                Notes
+                            </label>
+
+                            <textarea
+                                id="notes"
+                                name="notes"
+                            >{{ application.notes or '' }}</textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="actions">
+
+                    <a
+                        href="{{ url_for('applications') }}"
+                        class="btn cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn save-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
