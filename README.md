@@ -384,21 +384,18 @@ Recommended screenshots:
 - Home page
 ![alt text](<Screenshot 2026-10-11 184913.png>)
 - Login page
+![alt text](<Screenshot 2026-10-11 184840.png>)
 - Dashboard
+![alt text](<Screenshot 2026-10-11 184934.png>)
 - Applications page
+![alt text](<Screenshot 2026-10-11 185014.png>)
 - Application details
+![alt text](<Screenshot 2026-10-11 185039.png>)
 - Skill Analyzer
+![alt text](<Screenshot 2026-10-14 094509.png>)
+![alt text](<Screenshot 2026-10-14 094527.png>)
 - Profile page
-
-Example:
-
-```text
-## Dashboard
-
-![Dashboard](screenshots/dashboard.png)
-```
-
----
+![alt text](<Screenshot 2026-10-11 185123.png>)
 
 ## What This Project Demonstrates
 
