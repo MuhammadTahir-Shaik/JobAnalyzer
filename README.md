@@ -382,20 +382,20 @@ Screenshots of the application can be added here after the final UI capture.
 Recommended screenshots:
 
 - Home page
-![alt text](<Screenshot 2026-10-11 184913.png>)
+![alt text](<Home Page.png>)
 - Login page
-![alt text](<Screenshot 2026-10-11 184840.png>)
+![alt text](<Login Page.png>)
 - Dashboard
-![alt text](<Screenshot 2026-10-11 184934.png>)
+![alt text](Dashboard.png)
 - Applications page
-![alt text](<Screenshot 2026-10-11 185014.png>)
+![alt text](<My Applications.png>)
 - Application details
-![alt text](<Screenshot 2026-10-11 185039.png>)
+![alt text](<My Applications.png>)
 - Skill Analyzer
-![alt text](<Screenshot 2026-10-14 094509.png>)
-![alt text](<Screenshot 2026-10-14 094527.png>)
+![alt text](<Skill Analyzer1.png>)
+![alt text](<Skill Analyzer2.png>)
 - Profile page
-![alt text](<Screenshot 2026-10-11 185123.png>)
+![alt text](<Profile Page.png>)
 
 ## What This Project Demonstrates
 
